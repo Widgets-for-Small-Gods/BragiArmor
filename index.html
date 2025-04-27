@@ -49,8 +49,8 @@
       padding: 0.5em 0;
     }
 
-    .stat-row:nth-of-type(1), /* Vulnerable Size */
-    .stat-row:nth-of-type(2) { /* Vulnerable Armor */
+    .stat-row.vulnerable-size,
+    .stat-row.vulnerable-armor {
       background-color: #ffffff; /* White fill */
       border-radius: 8px;        /* Rounded corners */
       padding: 0.5em;              /* Add some internal padding */
@@ -126,7 +126,7 @@
     <div class="content">
       <!-- Vulnerable Size -->
       <h2 class="section-heading">Hit Size</h2>
-      <div class="stat-row">
+      <div class="stat-row vulnerable-size">
         <img class="stat-icon" src="vulnerable_size.png" alt="Vulnerable Size">
         <div id="bragi_base_vulnerablesize" class="stat-value">...</div>
         <div class="button-group">
@@ -149,7 +149,7 @@
       </div>
       <!-- Vulnerable Armor -->
       <h2 class="section-heading">Armor</h2>
-      <div class="stat-row">
+      <div class="stat-row vulnerable-armor">
         <img class="stat-icon" src="v_armor.png" alt="Vulnerable Armor">
         <div id="bragi_v_armor" class="stat-value">+<span class="value">...</span></div>
         <div class="button-group">
