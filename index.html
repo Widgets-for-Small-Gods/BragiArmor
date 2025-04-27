@@ -41,13 +41,13 @@
       padding: 0.5em 0;     /* extra vertical breathing room */
     }
     .stat-icon {
-      flex: 2;              /* icon cell = 2 parts */
-      width: auto;          /* override fixed size */
-      height: auto;
+      flex: 0 0 auto;
+      width: 3em;
+      height: 3em;
       max-height: 3em;      /* keeps icons from getting ridiculous */
     }
     .stat-value {
-      flex: 1;
+      flex: 1 1 auto;
       font-size: 1.5em;
       text-align: center;
     }
@@ -55,10 +55,10 @@
       font-weight: bold;
     }
     .button-group {
+      flex: 0 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 0.2em;
-      flex: 1;              /* value & buttons each = 1 part */
+      gap: 0.2em
     }
     .small-btn {
       background: #222;
