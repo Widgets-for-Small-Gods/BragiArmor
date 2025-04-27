@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bragi's Stats Tracker</title>
+  <style>
+    body {
+      background-color: #ffffff;
+      font-family: 'Georgia', serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .frame-container {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      background-image: url('HealthFrame.png');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      background-position: center;
+      font-size: clamp(14px, 2vw, 20px);
+      overflow: hidden;
+      padding-bottom: 100%;
+    }
+
+    .content {
+      position: absolute;
+      top: 10%;
+      left: 10%;
+      right: 10%;
+      bottom: 10%;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      text-align: center;
+      font-size: clamp(14px, 1.2vw, 18px);
+      color: #222;
+      overflow: auto;
+    }
+
+    .content h1 {
+      font-size: 2em;
+      margin: 0.5em 0;
+    }
+
+    .stat-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5em;
+    }
+
+    .stat-icon {
+      width: 1.5em;
+      height: 1.5em;
+    }
+
+    .stat-value {
+      flex: 1;
+      font-size: 1.5em;
+      text-align: center;
+    }
+
+    .small-btn {
+      background: #222;
+      color: white;
+      border: 1px solid #444;
+      font-size: 0.6em;
+      padding: 0.4em 0.6em;
+      cursor: pointer;
+      border-radius: 3px;
+    }
+
+    .small-btn:hover {
+      background: #444;
+    }
+  </style>
+</head>
+<body>
+  <div class="frame-container">
+    <div class="content">
+      <h1>Stats</h1>
+      <div class="stat-row">
+        <img class="stat-icon" src="armour.png" alt="Armour">
+        <div id="bragi_armour" class="stat-value">...</div>
+        <button class="small-btn" onclick="updateStat('bragi_armour', 1)">&#9650;</button>
+        <button class="small-btn" onclick="updateStat('bragi_armour', -1)">&#9660;</button>
+      </div>
+      <div class="stat-row">
+        <img class="stat-icon" src="v_armour.png" alt="Vulnerable Armour">
+        <div id="bragi_v_armour" class="stat-value">...</div>
+        <button class="small-btn" onclick="updateStat('bragi_v_armour', 1)">&#9650;</button>
+        <button class="small-btn" onclick="updateStat('bragi_v_armour', -1)">&#9660;</button>
+      </div>
+      <div class="stat-row">
+        <img class="stat-icon" src="hitsize.png" alt="Hit Size">
+        <div id="bragi_hitsize" class="stat-value">...</div>
+        <button class="small-btn" onclick="updateStat('bragi_hitsize', 1)">&#9650;</button>
+        <button class="small-btn" onclick="updateStat('bragi_hitsize', -1)">&#9660;</button>
+      </div>
+      <div class="stat-row">
+        <img class="stat-icon" src="vulnerable_size.png" alt="Vulnerable Size">
+        <div id="bragi_base_vulnerablesize" class="stat-value">...</div>
+        <button class="small-btn" onclick="updateStat('bragi_base_vulnerablesize', 1)">&#9650;</button>
+        <button class="small-btn" onclick="updateStat('bragi_base_vulnerablesize', -1)">&#9660;</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const binId = '6804eef68960c979a589342b';
+    const apiKey = '$2a$10$8TH7O/Zi1by5brUwAQ1sHuhni1xdi8MIG/A.mxonUfTPkihZXCCZ.';
+    const baseUrl = `https://api.jsonbin.io/v3/b/${binId}`;
+    const headers = {
+      'X-Master-Key': apiKey,
+      'Content-Type': 'application/json'
+    };
+
+    const stats = [
+      'bragi_armour',
+      'bragi_v_armour',
+      'bragi_hitsize',
+      'bragi_base_vulnerablesize'
+    ];
+    let statValues = {};
+
+    async function fetchStats() {
+      try {
+        const res = await fetch(`${baseUrl}/latest`, { headers });
+        const data = await res.json();
+        stats.forEach(key => {
+          statValues[key] = data.record[key] || 0;
+        });
+        renderStats();
+      } catch (err) {
+        console.error('Error fetching stats:', err);
+        stats.forEach(key => {
+          document.getElementById(key).innerText = 'Err';
+        });
+      }
+    }
+
+    function renderStats() {
+      stats.forEach(key => {
+        document.getElementById(key).innerText = statValues[key];
+      });
+    }
+
+    async function updateStat(key, change) {
+      statValues[key] = Math.max(0, statValues[key] + change);
+      renderStats();
+
+      // Fetch full record to preserve other fields
+      const res = await fetch(`${baseUrl}/latest`, { headers });
+      const data = await res.json();
+      const fullRecord = data.record;
+
+      // Update our stats
+      stats.forEach(k => {
+        fullRecord[k] = statValues[k];
+      });
+
+      // PUT updated record
+      await fetch(baseUrl, {
+        method: 'PUT',
+        headers,
+        body: JSON.stringify(fullRecord)
+      });
+    }
+  </script>
+</body>
+</html>
