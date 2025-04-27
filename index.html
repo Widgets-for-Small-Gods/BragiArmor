@@ -32,20 +32,23 @@
       font-size: 2em;
       margin: 0.5em 0;
     }
+        
     .stat-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 0.5em;
-      min-height: 3em;      /* or tweak to taste */
-      padding: 0.5em 0;     /* extra vertical breathing room */
+      min-height: 6em; /* was 3em — make the rows taller */
+      padding: 0.5em 0;
     }
+    
     .stat-icon {
-      flex: 0 0 auto;
-      width: 3em;
-      height: 3em;
-      max-height: 3em;      /* keeps icons from getting ridiculous */
+      flex: 0 0 6em; /* force the icon column to be 6em wide */
+      width: 6em;
+      height: 6em;
+      max-height: 6em;
     }
+        
     .stat-value {
       flex: 1 1 auto;
       font-size: 1.5em;
