@@ -72,7 +72,6 @@
 <body>
   <div class="container">
     <div class="content">
-      <h1>Stats</h1>
       <!-- Vulnerable Size -->
       <div class="stat-row">
         <img class="stat-icon" src="vulnerable_size.png" alt="Vulnerable Size">
@@ -96,7 +95,7 @@
       <!-- Vulnerable Armor -->
       <div class="stat-row">
         <img class="stat-icon" src="v_armor.png" alt="Vulnerable Armor">
-        <div id="bragi_v_armor" class="stat-value">...</div>
+        <div id="bragi_v_armor" class="stat-value">+<span class="value">...</span></div>
         <div class="button-group">
           <button class="small-btn" onclick="updateStat('bragi_v_armor', 1)">&#9650;</button>
           <button class="small-btn" onclick="updateStat('bragi_v_armor', -1)">&#9660;</button>
@@ -146,10 +145,23 @@
         });
       }
     }
-
+    
     function renderStats() {
       stats.forEach(key => {
-        document.getElementById(key).innerText = statValues[key];
+        const el = document.getElementById(key);
+        let display = statValues[key];
+    
+        if (key === 'bragi_v_armor') {
+          display = '+' + display;
+        }
+        if (key === 'bragi_hitsize') {
+          display = 'DC ' + display;
+        }
+        if (key === 'bragi_vulnerablesize') {
+          display = 'DC ' + display;
+        }
+    
+        el.innerText = display;
       });
     }
 
