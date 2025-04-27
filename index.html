@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Bragi's Armor Tracker</title>
+  <title>Bragi's Stats Tracker</title>
   <style>
     body {
       background-color: #ffffff;
@@ -38,13 +38,21 @@
       gap: 0.5em;
     }
     .stat-icon {
-      width: 1.5em;
-      height: 1.5em;
+      width: 2em;
+      height: 2em;
     }
     .stat-value {
       flex: 1;
       font-size: 1.5em;
       text-align: center;
+    }
+    .bold {
+      font-weight: bold;
+    }
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2em;
     }
     .small-btn {
       background: #222;
@@ -64,29 +72,43 @@
   <div class="container">
     <div class="content">
       <h1>Stats</h1>
-      <div class="stat-row">
-        <img class="stat-icon" src="armor.png" alt="armor">
-        <div id="bragi_armor" class="stat-value">...</div>
-        <button class="small-btn" onclick="updateStat('bragi_armor', 1)">&#9650;</button>
-        <button class="small-btn" onclick="updateStat('bragi_armor', -1)">&#9660;</button>
-      </div>
-      <div class="stat-row">
-        <img class="stat-icon" src="v_armor.png" alt="Vulnerable armor">
-        <div id="bragi_v_armor" class="stat-value">...</div>
-        <button class="small-btn" onclick="updateStat('bragi_v_armor', 1)">&#9650;</button>
-        <button class="small-btn" onclick="updateStat('bragi_v_armor', -1)">&#9660;</button>
-      </div>
-      <div class="stat-row">
-        <img class="stat-icon" src="hitsize.png" alt="Hit Size">
-        <div id="bragi_hitsize" class="stat-value">...</div>
-        <button class="small-btn" onclick="updateStat('bragi_hitsize', 1)">&#9650;</button>
-        <button class="small-btn" onclick="updateStat('bragi_hitsize', -1)">&#9660;</button>
-      </div>
+      <!-- Vulnerable Size -->
       <div class="stat-row">
         <img class="stat-icon" src="vulnerable_size.png" alt="Vulnerable Size">
         <div id="bragi_base_vulnerablesize" class="stat-value">...</div>
-        <button class="small-btn" onclick="updateStat('bragi_base_vulnerablesize', 1)">&#9650;</button>
-        <button class="small-btn" onclick="updateStat('bragi_base_vulnerablesize', -1)">&#9660;</button>
+        <div class="button-group">
+          <button class="small-btn" onclick="updateStat('bragi_base_vulnerablesize', 1)">&#9650;</button>
+          <button class="small-btn" onclick="updateStat('bragi_base_vulnerablesize', -1)">&#9660;</button>
+        </div>
+      </div>
+      <!-- Hit Size -->
+      <div class="stat-row">
+        <img class="stat-icon" src="hitsize.png" alt="Hit Size">
+        <div id="bragi_hitsize" class="stat-value bold">...</div>
+        <div class="button-group">
+          <button class="small-btn" onclick="updateStat('bragi_hitsize', 1)">&#9650;</button>
+          <button class="small-btn" onclick="updateStat('bragi_hitsize', -1)">&#9660;</button>
+        </div>
+      </div>
+      <!-- Small gap before Vulnerable Armor -->
+      <div style="height: 0.5em;"></div>
+      <!-- Vulnerable Armor -->
+      <div class="stat-row">
+        <img class="stat-icon" src="v_armor.png" alt="Vulnerable Armor">
+        <div id="bragi_v_armor" class="stat-value">...</div>
+        <div class="button-group">
+          <button class="small-btn" onclick="updateStat('bragi_v_armor', 1)">&#9650;</button>
+          <button class="small-btn" onclick="updateStat('bragi_v_armor', -1)">&#9660;</button>
+        </div>
+      </div>
+      <!-- Armor -->
+      <div class="stat-row">
+        <img class="stat-icon" src="armor.png" alt="Armor">
+        <div id="bragi_armor" class="stat-value bold">...</div>
+        <div class="button-group">
+          <button class="small-btn" onclick="updateStat('bragi_armor', 1)">&#9650;</button>
+          <button class="small-btn" onclick="updateStat('bragi_armor', -1)">&#9660;</button>
+        </div>
       </div>
     </div>
   </div>
@@ -101,10 +123,10 @@
     };
 
     const stats = [
-      'bragi_armor',
-      'bragi_v_armor',
+      'bragi_base_vulnerablesize',
       'bragi_hitsize',
-      'bragi_base_vulnerablesize'
+      'bragi_v_armor',
+      'bragi_armor'
     ];
     let statValues = {};
 
@@ -151,9 +173,9 @@
         body: JSON.stringify(fullRecord)
       });
     }
-    
-      // Initial load
-      fetchStats();
+
+    // Initial load
+    fetchStats();
   </script>
 </body>
 </html>
