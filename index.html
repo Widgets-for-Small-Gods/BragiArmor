@@ -104,8 +104,11 @@
       flex: 0 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 0.2em
+      justify-content: center; /* Align buttons vertically */
+      align-items: center;     /* Center buttons horizontally */
+      gap: 0.2em;          
     }
+    
     .small-btn {
       background: #222;
       color: white;
@@ -114,7 +117,9 @@
       padding: 0.4em 0.6em;
       cursor: pointer;
       border-radius: 3px;
+      width: 3em;             /* Set a fixed width for buttons */
     }
+   
     .small-btn:hover {
       background: #444;
     }
