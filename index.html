@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Bragi's Stats Tracker</title>
+  <title>Bragi's Armor Tracker</title>
   <style>
     body {
       background-color: #ffffff;
@@ -65,16 +65,16 @@
     <div class="content">
       <h1>Stats</h1>
       <div class="stat-row">
-        <img class="stat-icon" src="armour.png" alt="Armour">
-        <div id="bragi_armour" class="stat-value">...</div>
-        <button class="small-btn" onclick="updateStat('bragi_armour', 1)">&#9650;</button>
-        <button class="small-btn" onclick="updateStat('bragi_armour', -1)">&#9660;</button>
+        <img class="stat-icon" src="armor.png" alt="armor">
+        <div id="bragi_armor" class="stat-value">...</div>
+        <button class="small-btn" onclick="updateStat('bragi_armor', 1)">&#9650;</button>
+        <button class="small-btn" onclick="updateStat('bragi_armor', -1)">&#9660;</button>
       </div>
       <div class="stat-row">
-        <img class="stat-icon" src="v_armour.png" alt="Vulnerable Armour">
-        <div id="bragi_v_armour" class="stat-value">...</div>
-        <button class="small-btn" onclick="updateStat('bragi_v_armour', 1)">&#9650;</button>
-        <button class="small-btn" onclick="updateStat('bragi_v_armour', -1)">&#9660;</button>
+        <img class="stat-icon" src="v_armor.png" alt="Vulnerable armor">
+        <div id="bragi_v_armor" class="stat-value">...</div>
+        <button class="small-btn" onclick="updateStat('bragi_v_armor', 1)">&#9650;</button>
+        <button class="small-btn" onclick="updateStat('bragi_v_armor', -1)">&#9660;</button>
       </div>
       <div class="stat-row">
         <img class="stat-icon" src="hitsize.png" alt="Hit Size">
@@ -101,8 +101,8 @@
     };
 
     const stats = [
-      'bragi_armour',
-      'bragi_v_armour',
+      'bragi_armor',
+      'bragi_v_armor',
       'bragi_hitsize',
       'bragi_base_vulnerablesize'
     ];
