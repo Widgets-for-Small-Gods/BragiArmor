@@ -80,6 +80,18 @@
       text-align: center;
       font-weight: bold;
     }
+
+    .divider-container {
+      width: 100%;
+      padding: 0.1em 0 1.5em 0; /* control space around divider */
+      display: flex;
+      justify-content: center;
+    }
+    
+    .divider-container img {
+      width: 100%;
+      height: auto;
+    }
     
     .button-group {
       flex: 0 0 auto;
@@ -124,7 +136,9 @@
         </div>
       </div>
       <!-- Small gap before Vulnerable Armor -->
-      <img src="divider.png" alt="Divider" style="width: 100%; height: auto; 1em 0 5em 0">
+      <div class="divider-container">
+        <img src="divider.png" alt="Divider">
+      </div>
       <!-- Vulnerable Armor -->
       <h2 class="section-heading">Armor</h2>
       <div class="stat-row">
