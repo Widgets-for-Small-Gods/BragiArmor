@@ -169,7 +169,27 @@
         el.innerText = display;
       });
     }
+function renderStats() {
+  stats.forEach(key => {
+    const el = document.getElementById(key);
+    let display;
 
+    if (key === 'bragi_base_vulnerablesize') {
+      // show base_vulnerablesize + v_armor
+      display = 'DC ' + (statValues['bragi_base_vulnerablesize']
+              + statValues['bragi_v_armor']);
+    } else if (key === 'bragi_v_armor') {
+      // keep the "+" prefix on v_armor
+      display = '+' + statValues[key];
+    } else if (key === 'bragi_hitsize') {
+      display = 'DC ' + statValues[key];
+    } else { 
+      display = statValues[key];
+    }
+
+    el.innerText = display;
+  });
+}
     async function updateStat(key, change) {
       statValues[key] = Math.max(0, statValues[key] + change);
       renderStats();
