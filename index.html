@@ -48,6 +48,18 @@
       min-height: 6em; /* was 3em — make the rows taller */
       padding: 0.5em 0;
     }
+
+    .stat-row.important-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5em;
+      min-height: 6em; /* was 3em — make the rows taller */
+      padding: 0.5em 0;
+      background-color: #f8f8f8; /* very light grey */
+      border-radius: 8px;
+      padding: 0.5em;
+    }
     
     .stat-icon {
       flex: 0 0 6em; /* force the icon column to be 6em wide */
@@ -61,9 +73,14 @@
       font-size: 1.5em;
       text-align: center;
     }
-    .bold {
+
+    .stat-value.important {
+      font-size: 2em; /* bigger */
+      color: #000;    /* maybe even a slightly darker color */
+      text-align: center;
       font-weight: bold;
     }
+    
     .button-group {
       flex: 0 0 auto;
       display: flex;
@@ -98,9 +115,9 @@
         </div>
       </div>
       <!-- Hit Size -->
-      <div class="stat-row">
+      <div class="stat-row important-row">
         <img class="stat-icon" src="hitsize.png" alt="Hit Size">
-        <div id="bragi_hitsize" class="stat-value bold">...</div>
+        <div id="bragi_hitsize" class="stat-value.important">...</div>
         <div class="button-group">
           <button class="small-btn" onclick="updateStat('bragi_hitsize', 1)">+</button>
           <button class="small-btn" onclick="updateStat('bragi_hitsize', -1)">-</button>
@@ -119,9 +136,9 @@
         </div>
       </div>
       <!-- Armor -->
-      <div class="stat-row">
+      <div class="stat-row important-row">
         <img class="stat-icon" src="armor.png" alt="Armor">
-        <div id="bragi_armor" class="stat-value bold">...</div>
+        <div id="bragi_armor" class="stat-value.important">...</div>
         <div class="button-group">
           <button class="small-btn" onclick="updateStat('bragi_armor', 1)">+</button>
           <button class="small-btn" onclick="updateStat('bragi_armor', -1)">-</button>
